@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import React, { FC } from 'react'
 
 export type TPluginProps = {

@@ -1,12 +1,16 @@
 {
-  "name": "plugin-example",
+  "name": "openapi-ui-plugin-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "cross-env BASEPREFIX=/openapi-ui vite --open /openapi-ui --port 9005 --strictPort",
+    "dev": "cross-env BASEPREFIX=/openapi-ui-plugin vite --open /openapi-ui-plugin --port 9005 --strictPort",
     "build": "tsc && vite build",
     "serve": "vite preview --port 9005 --strictPort",
     "preview": "vite preview --port 9005 --strictPort",
+    "server:prod": "node build/index.js",
+    "server:prod:local": "cross-env LOCAL=true BASEPREFIX=/openapi-ui-plugin node build/index.js",
+    "server:dev": "cross-env LOCAL=true BASEPREFIX=/openapi-ui-plugin tsx ./server/index.ts",
+    "server:build": "tsc --project tsconfig.server.json --noEmit false",
     "tsc": "tsc --project tsconfig.json",
     "lint:css": "stylelint ./src/**/styled.{js,ts} --fix",
     "lint:js": "eslint .",
