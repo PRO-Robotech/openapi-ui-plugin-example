@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs').promises
 import express, { Express } from 'express'
+import cors from 'cors'
 import http from 'http'
 // const { createProxyMiddleware } = require('http-proxy-middleware')
 import dotenv from 'dotenv'
@@ -9,6 +10,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const basePrefix = process.env.BASEPREFIX
+const allowedOrigins = process.env.CORS_ALLOWED_ORIGINS?.split(',').map(origin => origin.trim())
 
 // let options: dotenv.DotenvParseOutput | undefined
 // if (process.env.LOCAL === 'true') {
@@ -29,6 +31,18 @@ const expressWinston = require('express-winston')
 
 const app: Express = express()
 const port = process.env.PORT || 8080
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins?.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+  }),
+)
 
 app.use(`${basePrefix ? basePrefix : ''}/healthcheck`, healthcheck())
 app.use(metricsMiddleware)
