@@ -12,7 +12,7 @@ export default defineConfig({
       exposes: {
         './App': './src/App.tsx', // must match what host calls getRemote()
       },
-      shared: ['react', 'react-dom', 'react-router-dom', 'react-redux', '@reduxjs/toolkit'],
+      shared: ['react', 'react-dom', 'antd', 'react-router-dom', 'react-redux', '@reduxjs/toolkit'],
     }),
   ],
   build: {
