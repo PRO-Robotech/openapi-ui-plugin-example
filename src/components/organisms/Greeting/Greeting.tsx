@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import React, { FC } from 'react'
 import { Styled } from './styled'
+// import { useTheme } from 'hooks/ThemeModeContext'
 
 export type TGreetingProps = {
   cluster?: string
