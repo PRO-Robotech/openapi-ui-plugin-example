@@ -9,10 +9,19 @@ export type TAppInnerProps = {
   syntheticProject?: string
   pluginName?: string
   pluginPath?: string
+  toggleTheme?: () => void
 }
 
-export const AppInner: FC<TAppInnerProps> = ({ cluster, namespace, syntheticProject, pluginName, pluginPath }) => {
+export const AppInner: FC<TAppInnerProps> = ({
+  cluster,
+  namespace,
+  syntheticProject,
+  pluginName,
+  pluginPath,
+  toggleTheme,
+}) => {
   const inRouter = useInRouterContext()
+  // eslint-disable-next-line no-console
   console.log('Plugin sees router context?', inRouter)
 
   if (!inRouter) return <div>Plugin is NOT under host Router (likely duplicate react-router-dom)</div>
@@ -31,6 +40,7 @@ export const AppInner: FC<TAppInnerProps> = ({ cluster, namespace, syntheticProj
             syntheticProject={syntheticProject}
             pluginName={pluginName}
             pluginPath={pluginPath}
+            toggleTheme={toggleTheme}
           />
         }
       />
