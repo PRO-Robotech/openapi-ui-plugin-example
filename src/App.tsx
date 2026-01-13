@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import { Provider } from 'react-redux'
 import { store } from 'store/store'
 import { ExamplePage } from 'pages/ExamplePage'
+import { ThemeModeProvider } from 'hooks/ThemeModeContext'
+import { useThemeMode } from 'hooks/useThemeMode'
 import { AppInner } from './AppInner'
 
 export type TAppProps = {
@@ -23,11 +25,31 @@ export const App: FC<TAppProps> = ({
   withRoutes,
   toggleTheme,
 }) => {
+  const { mode, toggleTheme: toggleThemeInternal } = useThemeMode(toggleTheme)
+
+  const providerValue = { mode, toggleTheme: toggleThemeInternal }
+
   // Logic is specific for type of plugin
   if (!withRoutes) {
     return (
+      <ThemeModeProvider value={providerValue}>
+        <Provider store={store}>
+          <ExamplePage
+            cluster={cluster}
+            namespace={namespace}
+            syntheticProject={syntheticProject}
+            pluginName={pluginName}
+            pluginPath={pluginPath}
+            toggleTheme={toggleTheme}
+          />
+        </Provider>
+      </ThemeModeProvider>
+    )
+  }
+  return (
+    <ThemeModeProvider value={providerValue}>
       <Provider store={store}>
-        <ExamplePage
+        <AppInner
           cluster={cluster}
           namespace={namespace}
           syntheticProject={syntheticProject}
@@ -36,19 +58,7 @@ export const App: FC<TAppProps> = ({
           toggleTheme={toggleTheme}
         />
       </Provider>
-    )
-  }
-  return (
-    <Provider store={store}>
-      <AppInner
-        cluster={cluster}
-        namespace={namespace}
-        syntheticProject={syntheticProject}
-        pluginName={pluginName}
-        pluginPath={pluginPath}
-        toggleTheme={toggleTheme}
-      />
-    </Provider>
+    </ThemeModeProvider>
   )
 }
 
