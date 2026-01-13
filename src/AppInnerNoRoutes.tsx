@@ -8,9 +8,17 @@ export type TAppInnerProps = {
   syntheticProject?: string
   pluginName?: string
   pluginPath?: string
+  toggleTheme?: () => void
 }
 
-export const AppInner: FC<TAppInnerProps> = ({ cluster, namespace, syntheticProject, pluginName, pluginPath }) => {
+export const AppInner: FC<TAppInnerProps> = ({
+  cluster,
+  namespace,
+  syntheticProject,
+  pluginName,
+  pluginPath,
+  toggleTheme,
+}) => {
   return (
     <ExamplePage
       cluster={cluster}
@@ -18,6 +26,7 @@ export const AppInner: FC<TAppInnerProps> = ({ cluster, namespace, syntheticProj
       syntheticProject={syntheticProject}
       pluginName={pluginName}
       pluginPath={pluginPath}
+      toggleTheme={toggleTheme}
     />
   )
 }

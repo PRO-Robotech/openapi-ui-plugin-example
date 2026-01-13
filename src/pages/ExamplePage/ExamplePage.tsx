@@ -7,6 +7,7 @@ type TExamplePageProps = {
   syntheticProject?: string
   pluginName?: string
   pluginPath?: string
+  toggleTheme?: () => void
 }
 
 export const ExamplePage: FC<TExamplePageProps> = props => {

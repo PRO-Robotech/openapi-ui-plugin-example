@@ -11,9 +11,18 @@ export type TAppProps = {
   pluginName?: string
   pluginPath?: string
   withRoutes?: boolean
+  toggleTheme?: () => void
 }
 
-export const App: FC<TAppProps> = ({ cluster, namespace, syntheticProject, pluginName, pluginPath, withRoutes }) => {
+export const App: FC<TAppProps> = ({
+  cluster,
+  namespace,
+  syntheticProject,
+  pluginName,
+  pluginPath,
+  withRoutes,
+  toggleTheme,
+}) => {
   // Logic is specific for type of plugin
   if (!withRoutes) {
     return (
@@ -24,6 +33,7 @@ export const App: FC<TAppProps> = ({ cluster, namespace, syntheticProject, plugi
           syntheticProject={syntheticProject}
           pluginName={pluginName}
           pluginPath={pluginPath}
+          toggleTheme={toggleTheme}
         />
       </Provider>
     )
@@ -36,6 +46,7 @@ export const App: FC<TAppProps> = ({ cluster, namespace, syntheticProject, plugi
         syntheticProject={syntheticProject}
         pluginName={pluginName}
         pluginPath={pluginPath}
+        toggleTheme={toggleTheme}
       />
     </Provider>
   )
